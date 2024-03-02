@@ -2,7 +2,7 @@
 
 Setup a python virtual environment
 ```ps
-python -m venv ./venv
+python -m venv ./.venv
 ```
 
 Activate the virtual environment

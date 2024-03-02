@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Box, Grid, OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { HalfSpaceCollider, Physics, RigidBody } from "./@react-three/rapier";
+import { Suspense } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Canvas style={{
+      position: "absolute",
+      top   : "0px",
+      left  : "0px",
+      width : "100dvw",
+      height: "100dvh"
+    }}>
+      <OrbitControls/>
+      <Grid infiniteGrid/>
+      <Suspense>
+        <Physics debug gravity={[0, -9.81, 0]}>
+          <HalfSpaceCollider args={[{ x: 0, y: 1, z: 0 }]}/>
+          <RigidBody position={[0, 10, 0]}> <Box/> </RigidBody>
+          <RigidBody position={[0, 20, 0]}> <Box/> </RigidBody>
+          <RigidBody position={[0, 30, 0]}> <Box/> </RigidBody>
+          <RigidBody position={[0, 40, 0]}> <Box/> </RigidBody>
+          <RigidBody position={[0, 50, 0]}> <Box/> </RigidBody>
+          <RigidBody position={[0, 60, 0]}> <Box/> </RigidBody>
+          <RigidBody position={[0, 70, 0]}> <Box/> </RigidBody>
+        </Physics>
+      </Suspense>
+    </Canvas>
   )
 }
 
-export default App
+export default App;
